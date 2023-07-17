@@ -28,17 +28,6 @@ public class ProductController {
 	@Autowired
 	TransactionTemplate tranTemplate;
 
-	@RequestMapping("/main")
-	public String root(@SessionAttribute(name = "unameSession", required = false) String unameSession, Model model) {
-
-		model.addAttribute("unameSession", unameSession);
-
-		// 메인페이지 등록된 정보 불러오기
-		model.addAttribute("goodsInfo", goodsRegSvc.goodsRegList());
-
-		return "index";
-	}
-
 	// 재고 리스트 페이지
 	@RequestMapping("/goodsRegList")
 	public String proList(HttpServletRequest req, Model model, PagingVO vo,
@@ -178,26 +167,39 @@ public class ProductController {
 			for (int i = 0; i < sizelen; i++) {
 				goodsStock[i] = Integer.parseInt(goodsStockSub[i]);
 			}
-			int seq = 0;
-			for (int i = 0; i < oriClen; i++) {
-				for (int j = seq; j < seq + 5; j++) {
-					goodsStockSvc.goodsStockMod(goodsCode, goodsCategory, goodsName, goodsSize[j], goodsColor[i],
-							goodsStock[j], num);
-				}
-				seq = seq + 5;
-			}
 
+			int seq = 0;
 			int seq2 = 0;
-			if (orilen != sizelen) {
-				for (int i = oriClen; i < colorlen; i++) {
-					for (int j = orilen + seq2; j < orilen + seq2 + 5; j++) {
-						goodsStockSvc.goodsModMore(goodsCode, goodsName, goodsSize[j], goodsCategory, goodsColor[i],
+			if (orilen > colorlen) {
+				goodsStockSvc.goodsStockDel(goodsCode);
+				for (int i = 0; i < colorlen; i++) {
+					for (int j = seq; j < seq + 5; j++) {
+						goodsStockSvc.goodsStock(goodsCode, goodsName, goodsCategory, goodsColor[i], goodsSize[j],
 								goodsStock[j]);
 					}
-					seq2 = seq2 + 5;
+					seq = seq + 5;
+				}
+
+			} else {
+
+				for (int i = 0; i < oriClen; i++) {
+					for (int j = seq; j < seq + 5; j++) {
+						goodsStockSvc.goodsStockMod(goodsCode, goodsCategory, goodsName, goodsSize[j], goodsColor[i],
+								goodsStock[j], num);
+					}
+					seq = seq + 5;
+				}
+
+				if (orilen != sizelen) {
+					for (int i = oriClen; i < colorlen; i++) {
+						for (int j = orilen + seq2; j < orilen + seq2 + 5; j++) {
+							goodsStockSvc.goodsModMore(goodsCode, goodsName, goodsSize[j], goodsCategory, goodsColor[i],
+									goodsStock[j]);
+						}
+						seq2 = seq2 + 5;
+					}
 				}
 			}
-
 			System.out.println("상품수정성공");
 
 			return "redirect:goodsRegMod" + "?goodsCode=" + goodsCode;
@@ -245,9 +247,7 @@ public class ProductController {
 			throws Exception {
 
 		goodsRegSvc.goodsDetailRegProc(files, req);
-		return "index";
+		return "/";
 	}
-	
-	
 
 }

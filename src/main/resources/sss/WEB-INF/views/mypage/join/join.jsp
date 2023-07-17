@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div id="wrap">
-	<input type="hidden" id="vCode" value="${vCode }">
+	<input type="hidden" class="vCode" value="${vCode }">
 		<main id="main" class="memberPage dFlex">
 			<div class="logoArea">
 				<a href="/"> <img src="/images/MainLogo.png" alt="헤더로고이미지">
@@ -30,6 +30,7 @@
 							</h3>
 							<div>
 								<input type="text" name="uid" id="uid" maxlength="20" autofocus />
+								<input type="hidden" id="idCheck" />
 								<button type="button" id="idChkBtn" class="frmBtn">
 								ID 중복확인</button>
 							</div>
@@ -112,13 +113,13 @@
 								<label for="ubirthday">생년월일</label>
 							</h3>
 							<div>
-								<input type="text" name="ubirthday" id="ubirthday" maxlength="6"
+								<input type="text" name="ubirthday" id="ubirthday" maxlength="8"
 									size="8" />
 							</div>
-							<p>ex. 830815</p>
+							<p>ex. 19830815</p>
 						</li>
 						<li>
-							<h3>우편번호</h3>
+							<h3 class="req">우편번호</h3>
 							<div>
 								<input type="text" name="uzipcode" id="uzipcode" maxlength="7"
 									size="7" readonly />
@@ -128,7 +129,7 @@
 						</li>
 						<li>
 							<h3>
-								<label for="uaddr">주소</label>
+								<label for="uaddr" class="req">주소</label>
 							</h3>
 							<div>
 								<input type="text" name="uaddr" id="uaddr" maxlength="100"
@@ -164,5 +165,11 @@
 		<!-- 실제 작업영역 끝 -->
 	</div>
 	<!-- div#wrap -->
+	<script>
+		if ($(".vCode").val() == '' || $(".vCode").val() == null) {
+			location.href = 'joinAgreement';
+		}
+	</script>
+
 </body>
 </html>

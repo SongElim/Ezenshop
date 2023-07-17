@@ -18,7 +18,7 @@
 
 		<div id="innerWrap">
 
-			<%@ include file="/WEB-INF/views/inc/headerGNB_admin.jsp"%>
+			<%@ include file="/WEB-INF/views/inc/headerGNB.jsp"%>
 			<%@ include file="/WEB-INF/views/inc/sitemap.jsp"%>
 			<main id="main">
 
@@ -126,14 +126,14 @@ ${productDetail.goodsTXT}
 				<p class="goodsDetailImg"><img src="/uploadDir/${goodsDetailImg.imgName}" alt=""></p>
 			</c:forEach>
 			<!-- 리뷰사진 출력 끝 - 지원 -->
-
+			<fmt:parseNumber var="sp" value="${productDetail.goodsPrice}" integerOnly="true"/>
 			<form id="goodsFrm">
 				<input type="hidden" name="uname" value="${uname}">
 				<input type="hidden" name="goodsCode" value="${goodsCode}">
 				<input type="hidden" name="goodsName" value="${productDetail.goodsName}">
 				<input type="hidden" name="filename" value="${productDetail.filename}">
-				<input type="hidden" name="oriPrice" value="${productDetail.goodsPrice}"/>
-				<input type="hidden" name="goodsPrice" value="${sellPrice}">
+				<input type="hidden" name="goodsPrice" value="${productDetail.goodsPrice}"/>
+				<input type="hidden" name="goodsDiscount" value="${productDetail.goodsDiscount}" />
 			</form>
 
 			

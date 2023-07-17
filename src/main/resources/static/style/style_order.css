@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+h1 {
+	font-size: 40px; text-indent: 30px;
+}
 div#orderTbl {
 	width: 50%;
 	margin: 0 auto;
@@ -41,4 +43,15 @@ div#orderInput input {
 div#orderInput select {
 	font-size: 18px;
 	padding: 5px 2px;
+}
+div#orderBtnArea {
+	width: 50%;
+	margin: 20px auto;
+	text-align: center;
+}
+div#orderBtnArea button {
+	font-size: 22px;
+	width: 150px;
+	padding: 5px 10px;
+	cursor: pointer;
 }

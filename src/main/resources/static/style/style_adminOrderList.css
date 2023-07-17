@@ -30,7 +30,7 @@ div.proTblHeader {
 	font-weight: bold;
 	border-bottom: 1px solid #000;
 }
-div.listRow span{
+div.listRow{
 	border-bottom: 1px solid #ccc;
 }
 div.listRow span:not(:first-child){
@@ -51,7 +51,7 @@ div.proTblList>span:nth-child(1) {
 	width: 120px;
 }
 div.proTblList>span:nth-child(1) img {
-	
+	width: 80px;
 	height: 100px;
 }
 div.proTblList>span:nth-child(2) {
@@ -88,9 +88,7 @@ div.proTblList>span:nth-child(9) {
 div.proTblList>span:nth-child(10) {
 	width: 170px;
 }
-div.proTblList>span:nth-child(11) {
-	width: 170px;
-}
+
 
 div.proTblList span>b {
 	width: 100px;

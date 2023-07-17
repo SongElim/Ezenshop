@@ -19,6 +19,10 @@ public interface GoodsRegDao {
 	@Select("select * from goods order by num desc")
 	public List<GoodsRegDto> goodsRegList();
 
+	// 카테고리별
+	@Select("select * from goods where goodsCategory=#{param1}")
+	public List<GoodsRegDto> gcList(String goodsCategory);
+
 	// 재고등록
 	@Insert("insert into goods (goodsCode,goodsName,goodsCategory,goodsPrice,goodsDiscount) "
 			+ "values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5})")
@@ -64,7 +68,7 @@ public interface GoodsRegDao {
 	@Insert("insert into goodsDetailImg(goodsCode, imgName, oriFilename, filesize) values "
 			+ "(#{goodsCode}, #{imgName}, #{oriFilename}, #{filesize})")
 	public void addDetailImg(Map<String, Object> map) throws Exception;
-	
+
 	// 상품 추가 이미지 출력
 	@Select("select * from goodsDetailImg where goodsCode=#{param1}")
 	public List<GoodsDetailImgDto> goodsDetailImg(String goodsCode);

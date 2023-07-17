@@ -1,6 +1,9 @@
 package com.shop.svc;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.shop.dto.GoodsCateDto;
 import com.shop.dto.GoodsModDto;
@@ -53,4 +56,10 @@ public interface GoodsStockSvc {
 		
 		// 상품색상별 사이즈 출력
 		public List<GoodsStockSizeDto> goodsDetailSize(String goodsCode,String goodsColor);
+		
+		// 상품 구매에 따른 재고감소
+		public int cntMinus(HttpServletRequest req);
+		
+		// 상품 주문 취소에 따른 재고 증가
+		public int cntPlus(HttpServletRequest req);
 }

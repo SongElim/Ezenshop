@@ -83,6 +83,31 @@ public class MypageController {
 		return "redirect:/";
 	}
 	
+	// 회원가입 아이디 중복체크
+	@RequestMapping("/idCheck")
+	public String idCheck(String uid, Model model) {
+		if(memberService.idCheck(uid)) {
+			model.addAttribute("idCheck", true);
+		} else {
+			model.addAttribute("idCheck", false);
+		}
+		return "mypage/join/idCheck";
+	}
+	
+	// 우편번호 찾기 페이지
+//	@RequestMapping("/zipCodePage")
+//	public String idCheck() {
+//		return "mypage/join/zipCheck";
+//	}
+	
+	// 우편번호 찾기 페이지
+	@RequestMapping("/zipCode")
+	public String zipCode(Model model, String address) {
+		model.addAttribute("zipCode", memberService.zipCode(address));
+		model.addAttribute("address", address);
+		return "mypage/join/zipCheck";
+	}
+	
 	// 카카오 로그인, 회원가입
 	@RequestMapping("/kakaoLogin")
 	public String kakaoLogin(String code, HttpSession ses) {

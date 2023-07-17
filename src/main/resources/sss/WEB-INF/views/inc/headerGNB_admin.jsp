@@ -10,13 +10,9 @@
 		<div id="topGNB"  class="dFlex gnbs">
 			<nav class="topGnb">
 				<ul id="topUl" class="dFlex">
-				<c:if test="${unameSession==null }">
-					<li><a href="loginPage">LOGIN</a></li>
+					<li><a href="userList">회원관리</a></li>
 					<li>|</li>
-				</c:if>
-					<li>회원관리</li>
-					<li>|</li>
-					<li>ORDER</li>
+					<li><a href="orderList">ORDER</a></li>
 					<li>|</li>
 					<li class="slideCommu">
 						COMMUNITY
@@ -29,14 +25,18 @@
 					</li>
 					<li>|</li>
 					<li class="goSite">사이트맵</li>
-					<c:if test="${unameSession!=null }">
+
+					<c:if test="${not empty	pageContext.request.userPrincipal}">
 					<li>|</li>
-					<li><a href="logout">LOGOUT</a></li>
+					<li><a href="adminlogout">LOGOUT</a></li>
 					<li>|</li>
 					<li><a href="mypage">MYPAGE</a></li>
 					<li>|</li>
-					<li><b>${unameSession }</b> 님 로그인 중 </li>
+					<li>
+						${pageContext.request.userPrincipal.name} 접속중
+					</li>
 					</c:if>
+
 				</ul>
 			</nav>
 		</div>

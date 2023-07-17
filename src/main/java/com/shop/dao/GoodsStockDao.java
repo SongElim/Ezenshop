@@ -1,6 +1,7 @@
 package com.shop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -26,7 +27,7 @@ public interface GoodsStockDao {
 	public List<GoodsStockColorDto> goodsColorList();
 
 	// 재고별 사이즈
-	@Select("select distinct goodsCode,goodsColor,goodsSize from goodsStock where goodsStock != 0")
+	@Select("select distinct goodsCode,goodsColor,goodsSize,goodsStock from goodsStock where goodsStock != 0")
 	public List<GoodsStockSizeDto> goodsSizeList();
 
 	// 재고별 카테고리
@@ -78,5 +79,14 @@ public interface GoodsStockDao {
 			+ " values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6})")
 	public int goodsModMore(String goodsCode, String goodsName, String goodsSize, String goodsCategory,
 			String goodsColor, int goodsStock);
-
+	
+	// 상품 주문에 따른 재고 감소
+	@Update("update goodsStock set goodsStock = goodsStock-#{goodsCnt} where goodsCode=#{goodsCode} and goodsColor=#{goodsColor}"
+			+ " and goodsSize=#{goodsSize}")
+	public int cntMinus(Map<String,Object> map);
+	
+	// 상품 주문 취소에 따른 재고 증가
+	@Update("update goodsStock set goodsStock = goodsStock+#{goodsCnt} where goodsCode=#{goodsCode} and goodsColor=#{goodsColor}"
+			+ " and goodsSize=#{goodsSize}")
+	public int cntPlus(Map<String,Object> map);
 }

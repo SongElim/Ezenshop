@@ -20,7 +20,8 @@ public interface GoodsRegSvc {
 
 	// 재고목록1
 	public List<GoodsRegDto> goodsRegList();
-
+	public List<GoodsRegDto> gcList(String goodsCategory); 
+	
 	// 재고등록
 	public int goodsReg(String goodsCode, String goodsName, String goodsCategory, int goodsPrice, int goodsDiscount);
 

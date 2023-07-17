@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shop.dao.OrderDao;
-import com.shop.dto.orderDto;
+import com.shop.dto.OrderDto;
 import com.shop.svc.OrderSvc;
 
 @Service
@@ -29,6 +29,7 @@ public class OrderSvcImp implements OrderSvc {
 		map.put("goodsColor", req.getParameter("goodsColor"));
 		map.put("goodsSize", req.getParameter("goodsSize"));
 		map.put("goodsPrice", Integer.parseInt(req.getParameter("goodsPrice")));
+		map.put("goodsCnt", Integer.parseInt(req.getParameter("goodsCnt")));
 		map.put("adress", req.getParameter("adress"));
 		map.put("phonenum", req.getParameter("phonenum"));
 		map.put("paymentType", req.getParameter("paymentType"));
@@ -38,20 +39,44 @@ public class OrderSvcImp implements OrderSvc {
 
 	// 전체 주문수 -지원
 	@Override
-	public int orderTotalCnt() {
-		return orderDao.orderTotalCnt();
+	public int admOrderTotalCnt() {
+		return orderDao.admOrderTotalCnt();
 	}
 
 	// 전체 주문목록 조회 - 지원
 	@Override
-	public List<orderDto> orderList() {
-		return orderDao.orderList();
+	public List<OrderDto> admOrderList() {
+		return orderDao.admOrderList();
 	}
 
 	// 전체 주문목록 중 검색 - 지원
 	@Override
-	public List<orderDto> orderListSrc(String keyField, String keyWord) {
-		return orderDao.orderListSrc(keyField, keyWord);
+	public List<OrderDto> admOrderListSrc(String keyField, String keyWord) {
+		return orderDao.admOrderListSrc(keyField, keyWord);
 	}
 
+	// 전체 주문수 -지원
+	@Override
+	public int orderTotalCnt(String uid) {
+		return orderDao.orderTotalCnt(uid);
+	}
+
+	// 전체 주문목록 조회 - 지원
+	@Override
+	public List<OrderDto> orderList(String uid) {
+		return orderDao.orderList(uid);
+	}
+
+	// 전체 주문목록 중 검색 - 지원
+	@Override
+	public List<OrderDto> orderListSrc(String keyField, String keyWord, String uid) {
+		return orderDao.orderListSrc(keyField, keyWord, uid);
+	}
+
+	// 배송상태 변경
+	@Override
+	public void deliStatusMod(int num, String deliStatus) {
+		orderDao.deliStatusMod(num, deliStatus);
+
+	}
 }

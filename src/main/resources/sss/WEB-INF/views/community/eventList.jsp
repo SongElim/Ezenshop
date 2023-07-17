@@ -16,7 +16,7 @@
 		
 		<div id="innerWrap">
 			
-			<%@ include file ="/WEB-INF/views/inc/headerGNB_admin.jsp" %>
+			<%@ include file ="/WEB-INF/views/inc/headerGNB.jsp" %>
 			<%@ include file ="/WEB-INF/views/inc/sitemap.jsp" %>
 			<div id="content">
 				<h3 class="title">EVENT</h3>

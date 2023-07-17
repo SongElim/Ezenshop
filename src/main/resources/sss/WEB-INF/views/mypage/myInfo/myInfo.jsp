@@ -17,7 +17,7 @@
 		
 		<div id="innerWrap">
 			
-			<%@ include file ="/WEB-INF/views/inc/headerGNB_admin.jsp" %>
+			<%@ include file ="/WEB-INF/views/inc/headerGNB.jsp" %>
 			<%@ include file ="/WEB-INF/views/inc/sitemap.jsp" %>
 		<main id="main" class="memberPage dFlex">
 		
@@ -31,17 +31,13 @@
 								<label for="uid" class="req">아이디</label>
 							</h3>
 							 <span>${memberInfo.uid } <input type="hidden" name="uid" value="${uidSession}"></span>
-							<div>
-							
-							</div>
 						</li>
+							<c:if test="${memberInfo.oauth!='KAKAO' }">
 						<li>
 							<h3>
 								<label for="upw" class="req">비밀번호</label>
 							</h3>
 							<div>
-							<c:if test="${memberInfo.oauth=='KAKAO' }"><c:set value="disabled" var="KAKAO"/> 
-							</c:if>
 								<input type="password" name="upw" id="upw" maxlength="20" ${KAKAO }/> 
 								<label class="subTxt">
 									<input type="checkbox" id="pwView" /> 
@@ -59,6 +55,8 @@
 							</div>
 							<p id="pwChk"></p>
 						</li>
+							</c:if>
+							<c:if test="${memberInfo.oauth=='KAKAO' }"><input type="hidden" name="upw" value="${memberInfo.upw }"></c:if>
 						<li>
 							<h3>
 								<label for="uname" class="req">이름</label>

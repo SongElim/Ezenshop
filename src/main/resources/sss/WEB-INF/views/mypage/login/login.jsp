@@ -9,8 +9,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>로그인</title>
 		<link rel="stylesheet" href="/style/style_login.css">
-		<script src="/resource/jquery-3.6.0.min.js"></script>
-		<script src="/script/script_Login.js"></script>
 	</head>
 	<body>
 		<div id="wrap">
@@ -45,5 +43,7 @@
 		</div>
 		<!-- div#wrap -->
 		<input type="hidden" value="${login }" id="login">
+		<script src="/resource/jquery-3.6.0.min.js"></script>
+		<script src="/script/script_Login.js"></script>
 	</body>
 </html>

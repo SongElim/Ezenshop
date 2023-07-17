@@ -51,10 +51,6 @@
 	/* 회원가입 동의 체크박스 전체 선택 끝   /member/joinAgreement.jsp 	 */
 	/*//////////   회원가입 입력(/member/member.jsp)  시작   /////////*/
 	
-	if($("#vCode").val()==''||$("#vCode").val()==null){
-		location.href = 'joinAgreement';
-	}
-	
 	// 필수입력 영역 배경색 적용
 	//$("#regFrmTbl td.req").parent("tr").css({"background-color":"rgba(128,128,128,0.07)"});
 	
@@ -99,18 +95,13 @@
 			let popHeight = 320;
 			let topPos = (h-popHeight)/2;
 			
+			
 			let prop = "width="+popWidth+", height="+popHeight;
 				prop += ", left="+leftPos+", top="+topPos;
 			window.open(url, nickName, prop);
 		}
 	});
 	
-	//아이디 중복체크 팝업창 닫기
-	$("div#closeBtnArea>button").click(function(){
-		window.close();
-		opener.regFrm.uid.focus();
-		//opener 객체는 팝업창을 실행한 부모페이지를 지칭함.
-	});
 	
 	// 비밀번호 표시하기
 	$("#wrap #regFrmTbl input#pwView").click(function(){
@@ -170,26 +161,6 @@
 		window.open(url, nickName, prop);
 	});
 	
-	// 우편번호 팝업창에서 주소 검색
-	$("#addrSearchBtn").click(function(){
-		let area3 = $("#area3").val().trim();
-		if(area3 == ""){
-			alert("검색어를 입력해주세요.")
-			$("#area3").focus();
-		}else{
-			$("#zipFrm").submit();
-		}
-	});
-	
-	// 우편번호 팝업창에서 주소 선택
-	$("table#zipResTbl td").click(function(){
-		let txtAddr = $(this).children("span").text();
-		let zipcode = txtAddr.substring(0, 7);
-		let addr = txtAddr.substring(8);
-		window.opener.uzipcode.value = zipcode;
-		window.opener.uaddr.value = addr;
-		window.close();
-	});
 	
 	// 회원가입 이벤트
 	$("#joinSbmBtn").click(function(){
@@ -207,6 +178,7 @@
 	
 	function fnJoinSbm(){
 		let uid = $("#uid").val().trim();
+		let idCheck = $("#idCheck").val().trim();
 		$("#uid").val(uid);
 		let upw = $("#upw").val().trim();
 		$("#upw").val(upw);
@@ -215,12 +187,13 @@
 		$("#uname").val(uname);
 		let uemail_01 = $("#uemail_01").val().trim();
 		let uemail_02 = $("#uemail_02").val().trim();
+		let uzipCode = $("#uzipcode").val().trim();
+		let uaddr = $("#uaddr").val().trim();
 		$("#uemail").val(uemail_01+"@"+uemail_02);
 		let ubirthday = $("#ubirthday").val().trim();
 		let phoneNum1 = $("#phoneNum1").val().trim();
 		let phoneNum2 = $("#phoneNum2").val().trim();
 		let phoneNum3 = $("#phoneNum3").val().trim();
-		console.log(phoneNum1);
 		$("#phoneNum").val(phoneNum1+phoneNum2+phoneNum3);
 		$("#uemail").val(uemail_01+"@"+uemail_02);
 		
@@ -254,6 +227,16 @@
 			$("#uemail_02").focus();
 			return;
 		}
+		else if(uzipCode==""){
+			alert("우편번호를 입력해주세요.")
+			$("#uzipCode").focus();
+			return;
+		}
+		else if(uaddr==""){
+			alert("주소를 입력해주세요.")
+			$("#uaddr").val("").focus();
+			return;
+		} 
 		else if(isNaN(phoneNum1)){
 			alert("전화번호를 올바르게 입력해주세요.")
 			$("#phoneNum1").focus();
@@ -269,11 +252,17 @@
 			$("#phoneNum3").focus();
 			return;
 		}
-		else if(ubirthday!=""&&isNaN(ubirthday)){
-			alert("생년월일은 숫자만 입력할 수 있습니다..")
+		else if((ubirthday!=""&&isNaN(ubirthday))||(ubirthday.length<8&&ubirthday.length>0)){
+			alert("생년월일을 올바르게 입력해주세요.")
 			$("#ubirthday").val("").focus();
 			return;
-		} else{
+		}
+		else if(idCheck!="Yes"){
+			alert("아이디 중복검사를 해주세요.")
+			$("#upw").focus();
+			return;
+		}
+		else{
 			let chkSbmTF = confirm("회원가입 하시겠습니까?");
 			if(chkSbmTF){
 				$("#regFrm").attr("action","/join");
@@ -281,6 +270,8 @@
 			}
 		}
 	}
+	
+	
 	/*//////////   회원가입 입력(/member/member.jsp)  끝   /////////*/
 	///////////////////////////////////////////////////////////////////////////
 	

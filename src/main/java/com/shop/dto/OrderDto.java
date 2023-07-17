@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class orderDto {
+public class OrderDto {
 
 	private int num;
 	private String uid;

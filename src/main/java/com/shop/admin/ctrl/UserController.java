@@ -28,13 +28,27 @@ public class UserController {
 	public String userView(HttpServletRequest req, Model model) {
 		try {
 			
-			int num = Integer.parseInt(req.getParameter("num"));
-			System.out.println(num);
-			model.addAttribute("userView", memberSvc.userView(num));
+			String uid = req.getParameter("uid");
+			model.addAttribute("userView", memberSvc.getMember(uid));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return "/admin/management/userView";
 	}
-
+	
+	@RequestMapping("userMod")
+	public String userMod(HttpServletRequest req) {
+		String uid = req.getParameter("uid");
+		memberSvc.modUser(req);
+		
+		return "redirect:userView?uid="+uid;
+	}
+	
+	@RequestMapping("userDel")
+	public String userDel(HttpServletRequest req) {
+		String uid = req.getParameter("uid");
+		memberSvc.kakaoDelete(uid);
+		return "redirect:userList";
+	}
+	
 }

@@ -133,4 +133,10 @@ public class GoodsRegSvcImp implements GoodsRegSvc {
 		return goodsRegDao.goodsDetailImg(goodsCode);
 	}
 
+	@Override
+	public List<GoodsRegDto> gcList(String goodsCategory) {
+		
+		return goodsRegDao.gcList(goodsCategory);
+	}
+	
 }

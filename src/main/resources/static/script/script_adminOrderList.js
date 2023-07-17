@@ -220,20 +220,33 @@ $(function(){
 		
 	});
  	
- 	$("button#modDeli").click(function(){
+ 	$("#modDeli").click(function(){
  		var selCnt=$("select#deliStatus").length;
- 		console.log("selCnt : " + selCnt);
+ 		var btnCnt=$("button#deliMod").length;
+ 		// console.log("selCnt : " + selCnt);
+ 		//alert(selOpt);
  		
- 		if(selCnt==0){
- 		$(this).parent("span").append("<select name='deliStatus' id='deliStatus'>" 
-									+"<option>상품준비중</option>"
-									+"<option>배송중비중</option>"
-									+"<option>배송대기</option>"
-									+"<option>배송중</option>"
-									+"<option>배송완료</option>"
-									+"</select>"
-								);
+ 		
+ 		if(selCnt<=0){
+ 		$(this).parent("span").append(
+ 			"<select name='deliStatus' id='deliStatus'>" 
+				+"<option>상품준비중</option>"
+				+"<option>배송중비중</option>"
+				+"<option>배송대기</option>"
+				+"<option>배송중</option>"
+				+"<option>배송완료</option>"
+			+"</select>");
+			$("#deliStatus").after(
+	 		"<button id='deliStatusMod'>변경</button>"
+	 		);
  		}
+ 		
+		$("button#deliStatusMod").click(function(){
+	 		var num = $("span#num").attr("data-link");
+			var deliStatus= $("#deliStatus").val();				
+ 			
+ 			location.href="/deliStatusMod?num="+num+"&deliStatus="+deliStatus;
+ 		});
  	});
  	
 });

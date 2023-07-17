@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.shop.dto.MemberDto;
+import com.shop.dto.ZipCodeDTO;
 
 
 @Mapper
@@ -45,6 +46,18 @@ public interface MemberDao {
 	
 	@Delete("delete from member where uid= #{uid}")
 	public boolean kakaoDelete(String uid);
+	
+	@Select("select uid from member where uid = #{uid}")
+	public String idCheck(String uid);
+	
+	@Select("select * from tblzipCode where city like CONCAT('%',#{address},'%')"
+			+ "or town like CONCAT('%',#{address},'%') or village like CONCAT('%',#{address},'%')")
+	public List<ZipCodeDTO> zipCode(String address);
+	
+	@Update("update member set uname=#{uname}, ubirthday=#{ubirthday}, gender=#{gender}, "
+			+ "phoneNum=#{phoneNum}, uaddr=#{uaddr} where uid = #{uid}")
+	public void modUser(Map<String, Object> map);
+
 
 }
 

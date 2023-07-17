@@ -17,7 +17,7 @@
 
 		<div id="innerWrap">
 
-			<%@ include file="/WEB-INF/views/inc/headerGNB_admin.jsp"%>
+			<%@ include file="/WEB-INF/views/inc/headerGNB.jsp"%>
 			<%@ include file="/WEB-INF/views/inc/sitemap.jsp"%>
 			<div id="mainPage">
 				<main id="main">
@@ -64,9 +64,11 @@
 						<h1>TODAY BEST</h1>
 			
 						<form action="/productDetail">
-						<div id="TodayBestArea" class="dFlex">
+						<div id="TodayBestArea" class="slide_div2">
 
 								<c:forEach begin="0" end="5" step="1"  var="i" items="${goodsInfo}" >
+								<c:set var="disRate" value="${i.goodsDiscount/100}" />
+								<fmt:formatNumber var="discountRate" value="${disRate}" type="percent" pattern="0%" />
 
 								<div class="TodayBestImgArea">
 									<div class="TodayBestImg dFlex">
@@ -87,17 +89,24 @@
 									</div>
 									
 									<!-- div.TodayBestStatus -->
-									<div class="goodsInfo">
+									<div class="goods-Thumb-Info">
 										<a href="#" class="goodsName">${i.goodsName}</a> <br>
 										<a href="#" class="goodsSize">M~2XL(95~115)</a>
 
 										<p class="goodsDescript">
 											<!-- [세가지 타입의 기장 선택] -->
 										</p>
-										<p class="goodsPrice">
+										<p class="goodsPrice-thumb">
 									<fmt:formatNumber var="goodsPrice" value="${i.goodsPrice}" pattern="#,###" />
-										${goodsPrice}원<span data-link="${goodsDiscount}">${discountRate}</span>
+										${goodsPrice}원
+										<span data-link="${i.goodsDiscount}">
+											<c:if test="${discountRate != '0%'}">
+												${discountRate}
+											</c:if>
+										</span>
+										
 										</p>
+										
 
 									</div>
 									<!-- div.goodsInfo -->
@@ -126,7 +135,7 @@
 								<ul id="mainMenu" class="dFlex">
 									<li class="mainLi"><a href="#">All</a></li>
 									<li class="divider">|</li>
-									<li class="mainLi"><a href="#">TOP</a></li>
+									<li class="mainLi"><a href="">TOP</a></li>
 									<li class="divider">|</li>
 									<li class="mainLi"><a href="#">SHIRTS</a></li>
 									<li class="divider">|</li>
@@ -136,20 +145,21 @@
 								</ul>
 								<!-- ul#mainMenu -->
 							</nav>
+						
 							<!-- nav#gnb -->
 						</div>
 						<!-- div#cateroryGnbArea -->
 
 
-						<div class="categoryBestImgDiv dFlex">
+						<div class="categoryBestImgDiv">
 
-							<c:forEach var="i" begin="1" end="4" step="1">
-
+						<c:forEach var="i" begin="0" end="16" step="1" items="${goodsInfo}">
+								<c:set var="disRate" value="${i.goodsDiscount/100}" />
+								<fmt:formatNumber var="discountRate" value="${disRate}" type="percent" pattern="0%" />
 								<div class="categoryBestImgArea">
 									<!-- div.categoryBestImg 시작 -->
-									<div class="categoryBestImg dFlex">
-										<a href="#"><img src="images/index/CategoryBest1.png"
-											alt="해당 제품명"></a>
+									<div class="categoryBestImg">
+										<a href="/productDetail?goodsCode=${i.goodsCode}"><img class="cate-Thumb" src="/uploadDir/${i.filename}" alt=""></a>
 									</div>
 									<!-- <!-- div.categoryBestImg 끝 -->
 									<div class="TodayBestStatus dFlex">
@@ -164,13 +174,20 @@
 									</div>
 									<!-- div.TodayBestStatus -->
 									<div class="goodsInfo">
-										<a href="#" class="goodsName">[1+1]감사제 링클리프 반팔셔츠</a> <br>
+										<a href="#" class="goodsName">${i.goodsName}</a> <br>
+										<b>${i.goodsCategory}</b>
 										<a href="#" class="goodsSize">M~2XL(95~115)</a>
 										<p class="goodsDescript">
 											<!-- [세가지 타입의 기장 선택] -->
 										</p>
 										<p class="goodsPrice">
-											37,800원<span data-link="${goodsDiscount}">15%</span>
+											<fmt:formatNumber var="goodsPrice" value="${i.goodsPrice}" pattern="#,###" />
+										${goodsPrice}원
+										<span data-link="${i.goodsDiscount}">
+											<c:if test="${discountRate != '0%'}">
+												${discountRate}
+											</c:if>
+										</span>
 										</p>
 									</div>
 									<!-- div.goodsInfo -->
@@ -181,55 +198,11 @@
 								</div>
 								<!-- div.categoryBestImgArea -->
 
-							</c:forEach>
+						</c:forEach>
 
 						</div>
 						<!-- div.categoryBestImgDiv -->
 
-						<div class="categoryBestImgDiv dFlex">
-
-							<c:forEach var="i" begin="1" end="4" step="1">
-
-								<div class="categoryBestImgArea">
-									<!-- div.categoryBestImg 시작 -->
-									<div class="categoryBestImg dFlex">
-										<a href="#"><img src="images/index/CategoryBest2.png"
-											alt="해당 제품명"></a>
-									</div>
-									<!-- <!-- div.categoryBestImg 끝 -->
-									<div class="TodayBestStatus dFlex">
-										<div class="colorOption">
-											<img src="images/index/ColorOption2png.png" alt="색상 이미지 첨부">
-										</div>
-										<!-- div.colorStatus -->
-										<div class="reviewCnt">
-											리뷰 : <span>50</span>
-										</div>
-										<!-- div.reviewCnt -->
-									</div>
-									<!-- div.TodayBestStatus -->
-									<div class="goodsInfo">
-										<a href="#" class="goodsName">[1+1]감사제 링클리프 반팔셔츠</a> <br>
-										<a href="#" class="goodsSize">M~2XL(95~115)</a>
-										<p class="goodsDescript">
-											<!-- [세가지 타입의 기장 선택] -->
-										</p>
-										<p class="goodsPrice">
-											37,800원<span data-link="${goodsDiscount}">15%</span>
-										</p>
-									</div>
-									<!-- div.goodsInfo -->
-									<div id="delStatusArea">
-										<span id="rushOrder">주문폭주</span> <span id="fastDeliver">당일배송</span>
-									</div>
-									<!-- div#delStatusArea -->
-								</div>
-								<!-- div.categoryBestImgArea -->
-
-							</c:forEach>
-
-						</div>
-						<!-- div.categoryBestImgDiv -->
 
 					</div>
 					<!-- div#categotyBestArea -->

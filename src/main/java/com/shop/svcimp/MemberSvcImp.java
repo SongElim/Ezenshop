@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.shop.dao.MemberDao;
 import com.shop.dto.MemberDto;
+import com.shop.dto.ZipCodeDTO;
 import com.shop.oauth.OAuthProvider;
 import com.shop.svc.MemberSvc;
 
@@ -80,6 +81,37 @@ public class MemberSvcImp implements MemberSvc {
 		map.put("p8", req.getParameter("uaddr"));
 		map.put("p9", req.getParameter("phoneNum"));
 		return memberDao.modMyInfo(map);
+	}
+
+	@Override
+	public boolean idCheck(String uid) {
+		if(memberDao.idCheck(uid)==null) {
+			return true; 
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public List<ZipCodeDTO> zipCode(String address) {
+		return memberDao.zipCode(address);
+	}
+
+	@Override
+	public void modUser(HttpServletRequest req) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("uid", req.getParameter("uid"));
+		map.put("uname", req.getParameter("uname"));
+		map.put("ubirthday", req.getParameter("ubirthday"));
+		map.put("gender", req.getParameter("gender"));
+		map.put("phoneNum", req.getParameter("phoneNum"));
+		map.put("uaddr", req.getParameter("uaddr"));
+		memberDao.modUser(map);
+	}
+
+	@Override
+	public boolean kakaoDelete(String uid) {
+		return memberDao.kakaoDelete(uid);
 	}
 
 

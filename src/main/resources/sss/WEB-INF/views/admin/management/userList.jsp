@@ -16,7 +16,7 @@
 		
 		<div id="innerWrap">
 			
-			<%@ include file ="/WEB-INF/views/inc/headerGNB_admin.jsp" %>
+			<%@ include file ="/WEB-INF/views/inc/headerGNB.jsp" %>
 			<%@ include file ="/WEB-INF/views/inc/sitemap.jsp" %>
 			
 			<div id="useListArea">
@@ -31,7 +31,7 @@
 				
 					<div class="userListTblHeader userListTbl dFlex">
 						
-						<span>닉네임</span>
+						<span>아이디</span>
 						<span>이름</span>
 						<span>나이</span>
 						<span>성별</span>
@@ -45,9 +45,7 @@
 					
 					<c:forEach begin="0" end="20" step="1" var="userList" items="${userList}">
 						<div class="userListTbl dFlex">
-						
-					
-							<span>${userList.uid}</span>
+							<span><a href="/userView?uid=${userList.uid}">${userList.uid}</a></span>
 							<span>${userList.uname}</span>
 							<span>${userList.ubirthday} </span>
 							<span>${userList.gender}</span>
@@ -55,7 +53,7 @@
 							<span>${userList.uaddr}</span>
 							<%-- <fmt:formatDate var="tm"  value="${userList.joinTm}" pattern="yyyy-MM-dd"/> --%>
 							<span>${userList.joinTm}</span>
-					
+							
 						</div>
 						<!-- div.userListTbl -->
 						
@@ -111,7 +109,7 @@
 	<!-- div#wrap -->
 	
 	<script src="/script/jquery-3.6.4.min.js"></script>
-	<script src="/script/script.js"></script>
+	<!-- <script src="/script/script.js"></script> -->
 	
 </body>
 </html>

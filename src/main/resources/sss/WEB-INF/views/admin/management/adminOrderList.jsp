@@ -17,14 +17,14 @@
 
 		<div id="innerWrap">
 
-			<%@ include file="/WEB-INF/views/inc/headerGNB_admin.jsp"%>
+			<%@ include file="/WEB-INF/views/inc/headerGNB.jsp"%>
 			<%@ include file="/WEB-INF/views/inc/sitemap.jsp"%>
 
 			<div id="proArea">
 
 				<div id="proHeader" class="dFlex jcsb">
 					<span class="sub">전체주문목록</span> <span class="total">총 상품수 : (
-						<b>${goodsTotal}</b> 개 )
+						<b>${admOrderTotal}</b> 개 )
 					</span>
 				</div>
 
@@ -36,54 +36,56 @@
 						<span>상품코드</span> 
 						<span>구매자ID</span>
 						<span>상품이름</span> 
-						<span>색상 / 사이즈</span> 
+						<span>색상 /<br> 사이즈/ <br>재고</span> 
 						<span>구매수량</span> 
 						<span>결제금액</span> 
 						<span>처리상태</span> 
-						<span>처리상태</span>
+						<span>주문시간</span>
 
 					</div>
 
-					<c:forEach var="goodsRegList" items="${goodsRegList}"
+					<c:forEach var="adminOrderList" items="${adminOrderList}"
 						begin="${paging.cntPerPage*(paging.nowPage-1)}"
 						end="${(paging.nowPage*paging.cntPerPage)-1}" step="1"
 						varStatus="status">
 
 
 						<div class="proTblList listRow dFlex">
-							<span><img src="/uploadDir/${goodsRegList.filename}" alt=""></span>
-							<span>${goodsRegList.num}</span>
-							<span>${goodsRegList.goodsCode}</span>
-							<span>${goodsRegList.uid}</span> 
-							<span>${goodsRegList.goodsName}</span>
+							<span><img src="/uploadDir/${adminOrderList.filename}" alt=""></span>
+							<span id="num" data-link="${adminOrderList.num}">${adminOrderList.num}</span>
+							<span>${adminOrderList.goodsCode}</span>
+							<span>${adminOrderList.uid}</span> 
+							<span>${adminOrderList.goodsName}</span>
 							<span> 
 								<b>
-									${goodsRegList.goodsColor}  
-									/  ${goodsRegList.goodsName}
+									${adminOrderList.goodsColor}  
+									/  	${adminOrderList.goodsSize}
+									<c:forEach var="a" items="${allGS}">						
+										<c:if test="${a.goodsCode eq adminOrderList.goodsCode}">
+											<c:if test="${a.goodsColor eq adminOrderList.goodsColor}">
+												<c:if test="${a.goodsSize eq adminOrderList.goodsSize}">
+													/ ${a.goodsStock}
+												</c:if>
+											</c:if>
+										</c:if>
+									</c:forEach>
+									
 							 	</b>
 							</span> 
-							<span>${goodsRegList.goodsCnt}</span>
-							<span>${goodsRegList.goodsPrice * goodsRegList.goodsCnt}</span>
+							<span>${adminOrderList.goodsCnt}</span>
+							<span>${adminOrderList.goodsPrice * adminOrderList.goodsCnt}</span>
 							<span>
-								<input type="hidden" id="chkDeli" value="${goodsRegList.deliStatus}">
-								<span class="deliSpan">${goodsRegList.deliStatus}</span>
+								<input type="hidden" id="chkDeli" value="${adminOrderList.deliStatus}">
+								<span class="deliSpan">${adminOrderList.deliStatus}</span>
 								<!-- form 만들기 -->
 								<button type="button" id="modDeli">수정하기</button>
-								<!-- 
-								<select name="deliStatus" id="deliStatus">
-									<option>상품준비중</option>
-									<option>배송중비중</option>
-									<option>배송대기</option>
-									<option>배송중</option>
-									<option>배송완료</option>
-								</select>
-								 -->
+								
 							</span>
-							<span>${goodsRegList.orderTM}</span>
+							<span>${adminOrderList.orderTM}</span>
 							
 							<form action="/goodsDetailReg" id="goodsDetailRegFrm">
 								<input type="hidden" id="saleRegCode" name="goodsCode"
-									value="${goodsRegList.goodsCode}">
+									value="${adminOrderList.goodsCode}">
 							</form>
 						</div>
 
@@ -140,8 +142,8 @@
 								<option value="goodsCode">상품코드</option>
 								<option value="uid">구매자ID</option>
 								<option value="goodsName">상품이름</option>
-								<option value="goodsCategory">카테고리</option>
-							</select> <input type="text" name="keyWord" placeholder="검색어를 입력하세요."
+							</select> 
+							<input type="text" name="keyWord" placeholder="검색어를 입력하세요."
 								form="grSrcFrm" />
 							<button type="submit" id="srcBtn" form="grSrcFrm">검색</button>
 							<form id="grSrcFrm" action="/adminOrderList"></form>

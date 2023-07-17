@@ -15,7 +15,7 @@
 		<div id="wrap">
 			<div id="innerWrap">
 			<h1>Q&A</h1>
-			<%@ include file="/WEB-INF/views/inc/headerGNB_admin.jsp"%>
+			<%@ include file="/WEB-INF/views/inc/headerGNB.jsp"%>
 			<%@ include file="/WEB-INF/views/inc/sitemap.jsp"%>
 			<form action="/qnaWrite"  method="post" enctype="multipart/form-data">
 				<table id="inquiryTBL">

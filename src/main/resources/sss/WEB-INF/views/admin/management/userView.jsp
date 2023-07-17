@@ -16,7 +16,7 @@
 		
 		<div id="innerWrap">
 			
-			<%@ include file ="/WEB-INF/views/inc/headerGNB_admin.jsp" %>
+			<%@ include file ="/WEB-INF/views/inc/headerGNB.jsp" %>
 			<%@ include file ="/WEB-INF/views/inc/sitemap.jsp" %>
 			
 			<div id="wrapView">
@@ -42,24 +42,26 @@
 				
 					
 					
+							<form id="umFrm">
 						<div class="viewListTbl dFlex"">
-						
-								
-					<%-- 		<span>${userView.num}</span> --%>
-							<span>${userView.uid}</span>
-							<span>${userView.uname}</span>
-							<span>${userView.ubirthday} </span>
-							<span>${userView.gender}</span>
-							<span>${userView.phoneNum}</span>
-							<span>${userView.uaddr}</span>
-						<%-- 	<fmt:parseDate value="${userList.joinTm}" var="joinTm" pattern="yyyyMMdd"/>
-							<fmt:formatDate var="tm"  value="${userList.joinTm}" pattern="yyyy-MM-dd"/> --%>
-							<span>${userView.joinTm}</span>
+								<span>${userView.uid}</span>
+								<span><input type="text" name="uname" value="${userView.uname}"/></span>
+								<span><input type="text" name="ubirthday" value="${userView.ubirthday}"/></span>
+								<span><input type="text" name="gender" value="${userView.gender}"/></span>
+								<span><input type="text" name="phoneNum" value="${userView.phoneNum}"/></span>
+								<span><input type="text" name="uaddr" value="${userView.uaddr}"/></span>
+								<span>${userView.joinTm}</span>
 					
 						</div>
+								<input type="hidden" name="uid" value="${userView.uid}"/>
 						<!-- div.userListTbl -->
+						<div id="userBtnArea">
+							<button type="button" id="userModBtn">수정하기</button>
+							<button type="button" id="userDelBtn">삭제하기</button>
+							<button type="button" id="backBtn" onclick="location.href='/userList'">목록으로</button>
+						</div>
 						
-
+							</form>
 				
 				</div>
 				<!-- div#userListTblArea -->

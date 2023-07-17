@@ -17,7 +17,7 @@
 	<div id="wrap">
 
 		<div id="innerWrap">
-			<%@ include file="/WEB-INF/views/inc/headerGNB_admin.jsp"%>
+			<%@ include file="/WEB-INF/views/inc/headerGNB.jsp"%>
 			<%@ include file="/WEB-INF/views/inc/sitemap.jsp"%>
 
 			<main id="main">

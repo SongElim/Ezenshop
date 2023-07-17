@@ -1,6 +1,10 @@
 package com.shop.svcimp;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,6 +91,26 @@ public class GoodsStockSvcimp implements GoodsStockSvc {
 	@Override
 	public List<GoodsStockSizeDto> goodsDetailSize(String goodsCode, String goodsColor) {
 		return goodsStockDao.goodsDetailSize(goodsCode, goodsColor);
+	}
+
+	@Override
+	public int cntMinus(HttpServletRequest req) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("goodsCode", req.getParameter("goodsCode"));
+		map.put("goodsColor", req.getParameter("goodsColor"));
+		map.put("goodsSize", req.getParameter("goodsSize"));
+		map.put("goodsCnt", req.getParameter("goodsCnt"));
+		return goodsStockDao.cntMinus(map);
+	}
+
+	@Override
+	public int cntPlus(HttpServletRequest req) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("goodsCode", req.getParameter("goodsCode"));
+		map.put("goodsColor", req.getParameter("goodsColor"));
+		map.put("goodsSize", req.getParameter("goodsSize"));
+		map.put("goodsCnt", req.getParameter("goodsCnt"));
+		return goodsStockDao.cntPlus(map);
 	}
 
 }

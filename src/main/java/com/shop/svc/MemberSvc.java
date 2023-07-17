@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.shop.dto.MemberDto;
+import com.shop.dto.ZipCodeDTO;
 
 public interface MemberSvc {
 
@@ -28,6 +29,13 @@ public interface MemberSvc {
 	
 	public boolean modMyInfo(HttpServletRequest req);
 
+	public boolean idCheck(String uid);
+
+	public List<ZipCodeDTO> zipCode(String address);
+
+	public void modUser(HttpServletRequest req);
+
+	public boolean kakaoDelete(String uid);
 }
 
 

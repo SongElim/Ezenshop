@@ -16,12 +16,11 @@
 		
 		<div id="innerWrap">
 			
-			<%@ include file ="/WEB-INF/views/inc/headerGNB_admin.jsp" %>
+			<%@ include file ="/WEB-INF/views/inc/headerGNB.jsp" %>
 			<%@ include file ="/WEB-INF/views/inc/sitemap.jsp" %>
 			
 			<div id="orderTbl">
 				<h1>주문내역</h1>
-				<h1>uid: ${uid} // uname : ${param.uname}</h1>
 				<div id="goodsImg">
 					<img src="/uploadDir/${param.filename}" alt="주문상품사진" />
 				</div>
@@ -30,10 +29,10 @@
 					<span>상품이름 : </span><span>${param.goodsName}</span>
 					<span>상품색상 : </span><span>${param.goodsColor}</span>
 					<span>상품크기 : </span><span>${param.goodsSize}</span>
-					<fmt:formatNumber var="goodsPrice" value="${param.goodsPrice}" pattern="#,###" />
-					<span>상품가격 : </span><span>${goodsPrice} 원</span>
+					<fmt:formatNumber var="a" value="${param.goodsPrice*(100-param.goodsDiscount)*0.01}" pattern="###"/>
+					<span>상품가격 : </span><span>${a} 원</span>
 					<span>상품개수 : </span><span>${param.goodsCnt} 개</span>
-					<span>결제예정금액 : </span><span>${goodsPrice*3} 원</span>
+					<span>결제예정금액 : </span><span>${a*3} 원</span>
 					
 				</div>
 				<div id="orderInput">
@@ -62,7 +61,7 @@
 					<input type="hidden" name="goodsName" value="${param.goodsName}" />
 					<input type="hidden" name="goodsColor" value="${param.goodsColor}" />
 					<input type="hidden" name="goodsSize" value="${param.goodsSize}" />
-					<input type="hidden" name="goodsPrice" value="${param.oriPrice}" />
+					<input type="hidden" name="goodsPrice" value="${param.goodsPrice}" />
 					<input type="hidden" name="goodsCnt" value="${param.goodsCnt}" />
 					<input type="hidden" name="filename" value="${param.filename}" />
 				</form>

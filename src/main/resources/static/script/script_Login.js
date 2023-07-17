@@ -2,7 +2,7 @@
  * 
  */
  
- $(function(){
+$(function(){
 	// 로그인 버튼 전송
 	$("#loginBtn").click(function(){
 		fnLoginSbm();
